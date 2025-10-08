@@ -15,7 +15,7 @@ const Main = () => {
       </p>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 py-5 md:py-10">
         {trendingApps.map((app) => (
-          <AppCard app={app}></AppCard>
+          <AppCard key={app.id} app={app}></AppCard>
         ))}
       </div>
       <div className="flex justify-center">

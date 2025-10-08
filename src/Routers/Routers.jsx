@@ -5,12 +5,13 @@ import Error from "../Pages/Error/Error";
 import Home from "../Pages/Home/Home";
 import Apps from "../Pages/Apps/Apps";
 import Installation from "../Pages/Installation/Installation";
+import AppDetails from "../Pages/AppDetails/AppDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement: Error,
+    errorElement: <Error></Error>,
     HydrateFallback: <p>Loading........</p>,
     children: [
       { index: true, Component: Home },
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/installation",
         Component: Installation,
+      },
+      {
+        path: "/appDetails/:id",
+        Component: AppDetails,
       },
     ],
   },

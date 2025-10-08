@@ -70,7 +70,7 @@ const NavBar = () => {
         <NavLink to="/">
           <div className="flex justify-center items-center ml-2 gap-1">
             <img className="w-6 h-6" src={logo} alt="" />
-            <a className="text-xl font-bold text-purple-700">HERO.IO</a>
+            <span className="text-xl font-bold text-purple-700">HERO.IO</span>
           </div>
         </NavLink>
       </div>
@@ -110,7 +110,7 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         <a
-          className="btn bg-gradient-to-r from-purple-700  to-purple-300 text-white"
+          className="btn bg-gradient-to-r from-purple-900  to-purple-500 text-white"
           href="https://github.com/dashboard"
         >
           {" "}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useApps from "../../hooks/useApps";
 import AppCard from "../../Components/AppCard/Appcard";
-import { NavLink } from "react-router";
+import { Link } from "react-router";
 
 const Apps = () => {
   const { apps, loading, error } = useApps();
@@ -53,9 +53,12 @@ const Apps = () => {
         ) : (
           <div className="text-center col-span-3 flex flex-col items-center gap-4">
             <p className="text-gray-500 text-6xl font-bold">No Apps Found</p>
-            <NavLink to="/apps" className="btn btn-primary">
+            {/* <Link
+              to="/apps"
+              className="btn bg-gradient-to-r from-purple-900  to-purple-500  text-white"
+            >
               Show All Apps
-            </NavLink>
+            </Link> */}
           </div>
         )}
       </div>
