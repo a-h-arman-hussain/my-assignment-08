@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 const Apps = () => {
   const { apps, loading, error } = useApps();
-  console.log(apps, loading, error);
+  // console.log(apps, loading, error);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchLoading, setSearchLoading] = useState(false);
 
