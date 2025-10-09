@@ -1,12 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useApps from "../../hooks/useApps";
 import AppCard from "../../Components/AppCard/Appcard";
 import { Link } from "react-router";
+import Error from "../Error/Error";
+import Loader from "../../Components/Loader/Loader";
+import { ToastContainer } from "react-toastify";
 
 const Apps = () => {
   const { apps, loading, error } = useApps();
   console.log(apps, loading, error);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
+
+  useEffect(() => {
+    if (searchTerm.trim() !== "") {
+      setSearchLoading(true);
+      const timer = setTimeout(() => {
+        setSearchLoading(false);
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [searchTerm]);
+
+  if (loading) {
+    return <Loader></Loader>;
+  }
+  if (error) {
+    return <Error></Error>;
+  }
 
   const filteredApps = apps.filter((app) =>
     app.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -47,21 +68,23 @@ const Apps = () => {
           />
         </label>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 py-5 md:py-10">
-        {filteredApps && filteredApps.length > 0 ? (
-          filteredApps.map((app) => <AppCard key={app.id} app={app} />)
-        ) : (
-          <div className="text-center col-span-3 flex flex-col items-center gap-4">
-            <p className="text-gray-500 text-6xl font-bold">No Apps Found</p>
-            {/* <Link
-              to="/apps"
-              className="btn bg-gradient-to-r from-purple-900  to-purple-500  text-white"
-            >
-              Show All Apps
-            </Link> */}
-          </div>
-        )}
-      </div>
+      {searchLoading ? (
+        <div className="flex justify-center items-center mt-10">
+          <span className="loading loading-spinner text-purple-600 loading-md"></span>
+          <p className="ml-2 text-lg text-gray-600 font-medium">Searching...</p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 py-5 md:py-10">
+          {filteredApps && filteredApps.length > 0 ? (
+            filteredApps.map((app) => <AppCard key={app.id} app={app} />)
+          ) : (
+            <div className="text-center col-span-3 flex flex-col items-center gap-4">
+              <p className="text-gray-500 text-6xl font-bold">No Apps Found</p>
+            </div>
+          )}
+        </div>
+      )}
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

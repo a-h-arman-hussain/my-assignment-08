@@ -1,11 +1,11 @@
 import React from "react";
-import errorImg from "../../assets/error-404.png";
+import appErrorImg from "../../assets/App-Error.png";
 import { Link } from "react-router";
 
-const Error = () => {
+const AppsError = () => {
   return (
     <div className="max-w-4xl mx-auto flex flex-col items-center">
-      <img className="w-2xl" src={errorImg} alt="" />
+      <img className="w-2xl" src={appErrorImg} alt="" />
       <h1 className="text-4xl font-bold text-blue-900">
         Oops, page not found!
       </h1>
@@ -20,4 +20,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default AppsError;

@@ -2,10 +2,18 @@ import React from "react";
 import useApps from "../../hooks/useApps";
 import AppCard from "../AppCard/Appcard";
 import { NavLink } from "react-router";
+import Loader from "../Loader/Loader";
+import Error from "../../Pages/Error/Error";
 
 const Main = () => {
-  const { apps, loading, error } = useApps();
-  console.log(apps, loading, error);
+  const { apps, loading, error} = useApps();
+  
+  if (loading) {
+    return <Loader></Loader>;
+  }
+  if (error) {
+    return <Error></Error>;
+  }
   const trendingApps = apps.slice(0, 8);
   return (
     <div className="my-10">

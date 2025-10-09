@@ -1,20 +1,26 @@
-import React, { useState } from "react";
-import { Navigate, useParams } from "react-router";
+import React from "react"; // useState
+import { useParams } from "react-router";
 import useApps from "../../hooks/useApps";
 import { CiSaveDown2 } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
 import { AiFillLike } from "react-icons/ai";
 import Chart from "../../Components/Chart/Chart";
+import AppsError from "../AppsError/AppsError";
+// import { toast } from "react-toastify";
 
 const AppDetails = () => {
   const { id } = useParams();
-  const [isInstalled, setIsInstalled] = useState(false);
+
+  //   const [isInstalled, setIsInstalled] = useState(false);
   const { apps, loading } = useApps();
 
   //   console.log(apps, loading);
   const app = apps.find((a) => a.id === Number(id));
 
   if (loading) return <p>Loading.......</p>;
+  if (!app) {
+    return <AppsError></AppsError>;
+  }
 
   const {
     title,
@@ -28,9 +34,33 @@ const AppDetails = () => {
   } = app || {};
 
   const handleInstall = () => {
-    alert(`${title} Installed Successfully ✅`);
-    setIsInstalled(true);
-    Navigate("/installation", { state: { app } });
+    const installedApp = {
+      id,
+      title,
+      installedAt: new Date().toISOString(),
+    };
+    // console.log(installedApp);
+    const existingList = JSON.parse(localStorage.getItem("installed"));
+    // console.log(existingList);
+    let updatedList = [];
+    if (existingList) {
+      updatedList = [...existingList, installedApp];
+      //   console.log(updatedList);
+    } else {
+      updatedList.push(updatedList);
+    }
+    console.log(updatedList);
+    // localStorage.setItem("installed", JSON.stringify(updatedList));
+    // toast.success(`Completed`, {
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "colored",
+    // });
+    // setIsInstalled(true);
   };
 
   return (
@@ -70,13 +100,14 @@ const AppDetails = () => {
               </div>
             </div>
             <button
+              className="btn"
               onClick={handleInstall}
-              disabled={isInstalled}
-              className={`btn text-white ${
-                isInstalled ? "bg-green-500 cursor-not-allowed" : "bg-green-500"
-              }`}
+              //   disabled={isInstalled}
+              //   className={`btn text-white ${
+              //     isInstalled ? "bg-green-500 cursor-not-allowed" : "bg-green-500"
+              //   }`}
             >
-              {isInstalled ? "Installed" : "Install"}
+              {/* {isInstalled ? "Installed" : "Install"} */} install
             </button>
           </div>
         </div>
