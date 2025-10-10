@@ -2,6 +2,9 @@ import React from "react";
 import { NavLink } from "react-router";
 import { IoLogoGithub } from "react-icons/io5";
 import logo from "../../assets/logo.png";
+import { FaHome } from "react-icons/fa";
+import { PiAppStoreLogoFill } from "react-icons/pi";
+import { RiInstallFill } from "react-icons/ri";
 
 const NavBar = () => {
   return (
@@ -38,6 +41,7 @@ const NavBar = () => {
                     : "text-black"
                 }
               >
+                <FaHome />
                 Home
               </NavLink>
             </li>
@@ -50,6 +54,7 @@ const NavBar = () => {
                     : "text-black"
                 }
               >
+                <PiAppStoreLogoFill />
                 Apps
               </NavLink>
             </li>
@@ -62,6 +67,7 @@ const NavBar = () => {
                     : "text-black"
                 }
               >
+                <RiInstallFill />
                 Installation
               </NavLink>
             </li>
@@ -83,6 +89,7 @@ const NavBar = () => {
                 isActive ? "text-purple-600 underline font-bold" : "text-black"
               }
             >
+              <FaHome />
               Home
             </NavLink>
           </li>
@@ -93,6 +100,7 @@ const NavBar = () => {
                 isActive ? "text-purple-600 underline font-bold" : "text-black"
               }
             >
+              <PiAppStoreLogoFill />
               Apps
             </NavLink>
           </li>
@@ -103,6 +111,7 @@ const NavBar = () => {
                 isActive ? "text-purple-600 underline font-bold" : "text-black"
               }
             >
+              <RiInstallFill />
               Installation
             </NavLink>
           </li>

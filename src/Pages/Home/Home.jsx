@@ -7,6 +7,7 @@ import Error from "../Error/Error";
 
 const Home = () => {
   const { loading, error } = useApps();
+  
 
   if (loading) {
     return (

@@ -2,12 +2,17 @@ import React from "react";
 import { CiSaveDown2 } from "react-icons/ci";
 import { FaRegStarHalfStroke } from "react-icons/fa6";
 import { removeFromStoreDb } from "../../utility/utility";
+import { toast } from "react-toastify";
 
-const App = ({ a, onRemove }) => {
+const UninstallApp = ({ a, onRemove }) => {
+  //   const [remove, setRemove] = useState(false);
+
   const { id, image, title, downloads, ratingAvg, size } = a;
   console.log(a);
 
-  const handleRemove = () => {
+  const handleRemove = (id) => {
+    toast.success(`${title} installed successfully!`, { autoClose: 2000 });
+
     removeFromStoreDb(id);
     onRemove(id);
   };
@@ -31,11 +36,16 @@ const App = ({ a, onRemove }) => {
           </div>
         </div>
       </div>
-      <button onClick={handleRemove} className="btn">
-        Remove
-      </button>
+      <div>
+        <button
+          onClick={() => handleRemove(id)}
+          className="btn bg-red-500 text-white"
+        >
+          Uninstall
+        </button>
+      </div>
     </div>
   );
 };
 
-export default App;
+export default UninstallApp;

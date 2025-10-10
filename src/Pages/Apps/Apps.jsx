@@ -70,11 +70,10 @@ const Apps = () => {
       </div>
       {searchLoading ? (
         <div className="flex justify-center items-center mt-10">
-          <span className="loading loading-spinner text-purple-600 loading-md"></span>
-          <p className="ml-2 text-lg text-gray-600 font-medium">Searching...</p>
+          <Loader></Loader>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 py-5 md:py-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 py-5 md:py-10">
           {filteredApps && filteredApps.length > 0 ? (
             filteredApps.map((app) => <AppCard key={app.id} app={app} />)
           ) : (

@@ -4,8 +4,8 @@ import { Link } from "react-router";
 
 const Error = () => {
   return (
-    <div className="max-w-4xl mx-auto flex flex-col items-center">
-      <img className="w-2xl" src={errorImg} alt="" />
+    <div className="max-w-4xl mx-auto flex flex-col items-center mt-5">
+      <img src={errorImg} alt="" />
       <h1 className="text-4xl font-bold text-blue-900">
         Oops, page not found!
       </h1>

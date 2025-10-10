@@ -21,7 +21,7 @@ const Main = () => {
       <p className="text-center mt-2">
         Explore All Trending Apps on the Market developed by us
       </p>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 py-5 md:py-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 py-5 md:py-10">
         {trendingApps.map((app) => (
           <AppCard key={app.id} app={app}></AppCard>
         ))}

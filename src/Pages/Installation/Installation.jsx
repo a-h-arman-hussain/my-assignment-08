@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useApps from "../../hooks/useApps";
+import UninstallApp from "../../Components/UninstallApp/UninstallApp";
 import { getStoreDb } from "../../utility/utility";
-import App from "../../Components/App/App";
 import Loader from "../../Components/Loader/Loader";
-import Error from "../Error/Error";
+import { Link } from "react-router";
 
 const Installation = () => {
   const [installedApps, setIsInstalledApp] = useState([]);
   const [sort, setSort] = useState("");
-  const { apps, loading, error } = useApps();
-
-  //   if (loading) return <Loader></Loader>;
-  //   if (error) return <Error></Error>;
+  const { apps } = useApps();
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     const storedAppData = getStoreDb();
@@ -25,8 +23,11 @@ const Installation = () => {
     );
     console.log(installedApp);
     setIsInstalledApp(installedApp);
+    setloading(false);
   }, [apps]);
-
+  if (loading) {
+    return <Loader></Loader>;
+  }
   const handleSort = (sortType) => {
     setSort(sortType);
     if (sortType === "downloads") {
@@ -36,8 +37,10 @@ const Installation = () => {
       setIsInstalledApp(sortedByDownloads);
     }
 
-    if (sortType === "size") {
-      const sortedBySize = [...installedApps].sort((a, b) => a.size - b.size);
+    if (sortType === "downloads") {
+      const sortedBySize = [...installedApps].sort(
+        (a, b) => b.downloads - a.downloads
+      );
       setIsInstalledApp(sortedBySize);
     }
   };
@@ -52,12 +55,11 @@ const Installation = () => {
         <label className="form-control w-full max-w-xs">
           <select className="select select-bordered">
             Sort by : {sort ? sort : ""}
-            {/* <option value="none">Sort by : {sort ? sort : ""}</option> */}
             <option onClick={() => handleSort("downloads")} value="downloads">
-              Downloaded MB
+              Low - Hight
             </option>
-            <option onClick={() => handleSort("size")} value="size">
-              Downloading People
+            <option onClick={() => handleSort("downloads")} value="downloads">
+              Hight - Low
             </option>
           </select>
         </label>
@@ -70,15 +72,21 @@ const Installation = () => {
 
           <TabPanel>
             {installedApps.length === 0 ? (
-              <div>
+              <div className="flex flex-col justify-center items-center gap-5">
                 <p className="text-center text-4xl font-bold text-gray-500 mt-3">
                   No apps installed
                 </p>
+                <Link
+                  to="/"
+                  className="btn bg-gradient-to-r from-purple-900  to-purple-500 text-white"
+                >
+                  Go To Home
+                </Link>
               </div>
             ) : (
               <div className="grid gap-4">
                 {installedApps.map((a) => (
-                  <App
+                  <UninstallApp
                     key={a.id}
                     a={a}
                     onRemove={(id) => {
@@ -87,7 +95,7 @@ const Installation = () => {
                       );
                       setIsInstalledApp(updated);
                     }}
-                  ></App>
+                  ></UninstallApp>
                 ))}
               </div>
             )}
