@@ -51,7 +51,12 @@ const Installation = () => {
         Explore All Trending Apps on the Market developed by us
       </p>
       <div className="flex justify-between">
-        <h3>Installation Apps</h3>
+        <h3 className="text-3xl font-bold mb-2">
+          Installed Apps{" "}
+          <span className="text-xl text-gray-500">
+            ({installedApps.length})
+          </span>
+        </h3>
         <label className="form-control w-full max-w-xs">
           <select className="select select-bordered">
             Sort by : {sort ? sort : ""}
