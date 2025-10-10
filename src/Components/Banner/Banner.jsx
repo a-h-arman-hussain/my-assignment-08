@@ -40,8 +40,8 @@ const Banner = () => {
           <h3 className="text-4xl font-bold text-center text-white">
             Trusted by Millions, Built for You
           </h3>
-          <div className="flex justify-around px-5 mt-8">
-            <div className="">
+          <div className="flex flex-col md:flex-row  justify-around px-5 mt-8">
+            <div>
               <p className="text-center text-white">Total Downloads</p>
               <h1 className="text-center text-5xl font-bold text-white">
                 29.6M

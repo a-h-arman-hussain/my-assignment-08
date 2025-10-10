@@ -41,19 +41,8 @@ const AppDetails = () => {
   } = app;
 
   const handleInstall = () => {
-    // if (isInstalled) {
-    //   toast.info(`${title} is already installed!`, { autoClose: 2000 });
-    //   return;
-    // }
-
-    // const existing = JSON.parse(localStorage.getItem("installed")) || [];
-    // const updated = [...existing, { id: Number(id), title }];
-    // localStorage.setItem("installed", JSON.stringify(updated));
-
     addToStoreDb(id);
-
     setIsInstalled(true);
-
     toast.success(`${title} installed successfully!`, { autoClose: 2000 });
   };
 
@@ -71,7 +60,7 @@ const AppDetails = () => {
               </p>
             </div>
 
-            <div className="flex justify-around gap-8 py-3">
+            <div className="flex flex-col md:flex-row justify-around gap-8 py-3">
               <div className="text-left">
                 <p className="text-gray-400">Downloads</p>
                 <div className="flex items-center">
